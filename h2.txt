@@ -1,0 +1,143 @@
+drop table ALOCAMENTOS;
+drop table FUNCIONARIOS;
+drop table PROJETOS;
+drop table DEPARTAMENTOS;
+
+create table Departamentos(
+	id_departamento int auto_increment not null primary key,
+    nome_departamento varchar(200) not null,
+    quantidade_funcionarios int null
+);
+
+INSERT INTO Departamentos (nome_departamento) VALUES
+('Recursos Humanos'),
+('Desenvolvimento'),
+('Financeiro'),
+('Marketing'),
+('Suporte Técnico');
+
+create table Funcionarios(
+	id_funcionario int auto_increment not null primary key,
+    nome_funcionario varchar(200) not null,
+    id_departamento int not null,
+
+    foreign key (id_departamento) references Departamentos(id_departamento)
+    on delete cascade
+);
+
+INSERT INTO Funcionarios (nome_funcionario, id_departamento) VALUES
+('João Silva', 2),
+('Maria Oliveira', 1),
+('Carlos Santos', 3),
+('Ana Costa', 2),
+('Fernando Almeida', 4);
+
+
+create table Projetos(
+	id_projeto int auto_increment not null primary key,
+    nome_projeto varchar(200) not null,
+    descricao_projeto varchar(200) not null,
+    data_inicio date not null,
+    data_fim date null
+);
+
+INSERT INTO Projetos (nome_projeto, descricao_projeto, data_inicio) VALUES
+('Sistema de Gestão de RH', 'Desenvolver um sistema para gerenciar funcionários', '2023-01-10'),
+('E-commerce Completo', 'Desenvolvimento de plataforma de vendas online', '2023-03-01'),
+('Redesign do Site Institucional', 'Recriação da interface visual do site da empresa', '2023-02-15'),
+('Automatização de Relatórios Financeiros', 'Implementação de sistema para geração automática de relatórios', '2023-04-05'),
+('Campanha Digital 2023', 'Desenvolver campanha de marketing digital', '2023-01-20');
+
+create table Alocamentos (
+	id_alocamento int auto_increment not null primary key,
+    id_funcionario int not null,
+	id_projeto int not null,
+    data_alocacao date not null,
+
+    foreign key (id_funcionario) references Funcionarios(id_funcionario) on delete cascade ,
+    foreign key (id_projeto) references Projetos(id_projeto) on delete cascade
+);
+
+INSERT INTO Alocamentos (id_funcionario, id_projeto, data_alocacao) VALUES
+(1, 1, '2023-01-15'),
+(2, 3, '2023-02-20'),
+(3, 4, '2023-04-10'),
+(4, 2, '2023-03-05'),
+(5, 5, '2023-01-25');
+
+select * from ALOCAMENTOS;
+select * from DEPARTAMENTOS;
+select * from FUNCIONARIOS;
+select * from PROJETOS;
+
+drop table ALOCAMENTOS;
+drop table FUNCIONARIOS;
+drop table PROJETOS;
+drop table DEPARTAMENTOS;
+
+create table Departamentos(
+	id_departamento int auto_increment not null primary key,
+    nome_departamento varchar(200) not null,
+    quantidade_funcionarios int null
+);
+
+INSERT INTO Departamentos (nome_departamento) VALUES
+('Recursos Humanos'),
+('Desenvolvimento'),
+('Financeiro'),
+('Marketing'),
+('Suporte Técnico');
+
+create table Funcionarios(
+	id_funcionario int auto_increment not null primary key,
+    nome_funcionario varchar(200) not null,
+    id_departamento int not null,
+
+    foreign key (id_departamento) references Departamentos(id_departamento)
+    on delete cascade on update cascade
+);
+
+INSERT INTO Funcionarios (nome_funcionario, id_departamento) VALUES
+('João Silva', 2),
+('Maria Oliveira', 1),
+('Carlos Santos', 3),
+('Ana Costa', 2),
+('Fernando Almeida', 4);
+
+
+create table Projetos(
+	id_projeto int auto_increment not null primary key,
+    nome_projeto varchar(200) not null,
+    descricao_projeto varchar(200) not null,
+    data_inicio date not null,
+    data_fim date null
+);
+
+INSERT INTO Projetos (nome_projeto, descricao_projeto, data_inicio) VALUES
+('Sistema de Gestão de RH', 'Desenvolver um sistema para gerenciar funcionários', '2023-01-10'),
+('E-commerce Completo', 'Desenvolvimento de plataforma de vendas online', '2023-03-01'),
+('Redesign do Site Institucional', 'Recriação da interface visual do site da empresa', '2023-02-15'),
+('Automatização de Relatórios Financeiros', 'Implementação de sistema para geração automática de relatórios', '2023-04-05'),
+('Campanha Digital 2023', 'Desenvolver campanha de marketing digital', '2023-01-20');
+
+create table Alocamentos (
+	id_alocamento int auto_increment not null primary key,
+    id_funcionario int not null,
+	id_projeto int not null,
+    data_alocacao date not null,
+
+    foreign key (id_funcionario) references Funcionarios(id_funcionario) on delete cascade on update cascade,
+    foreign key (id_projeto) references Projetos(id_projeto) on delete cascade on update cascade
+);
+
+INSERT INTO Alocamentos (id_funcionario, id_projeto, data_alocacao) VALUES
+(1, 1, '2023-01-15'),
+(2, 3, '2023-02-20'),
+(3, 4, '2023-04-10'),
+(4, 2, '2023-03-05'),
+(5, 5, '2023-01-25');
+
+select * from ALOCAMENTOS;
+select * from DEPARTAMENTOS;
+select * from FUNCIONARIOS;
+select * from PROJETOS;

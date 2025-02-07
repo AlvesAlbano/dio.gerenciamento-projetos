@@ -1,6 +1,8 @@
 package dio.gerenciamento_projetos.model;
 
 import jakarta.persistence.*;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 @Entity
 @Table(name = "Funcionarios")
@@ -14,9 +16,9 @@ public class Funcionario {
     @Column(name = "nome_funcionario")
     private String nomeFuncionario;
 
-
     @JoinColumn(name = "id_departamento")
     @ManyToOne
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private Departamento departamento;
 
     public Funcionario(){}
