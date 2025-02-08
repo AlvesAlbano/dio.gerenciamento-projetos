@@ -36,7 +36,6 @@ public class DepartamentoController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
                     .body("Departamento não encontrado");
         }
-
         return ResponseEntity.ok(departamento);
     }
 
@@ -45,7 +44,7 @@ public class DepartamentoController {
         var novoDepartamento = departamentoRepository.saveAndFlush(departamento);
 
         URI uriDepartamento = ServletUriComponentsBuilder
-                .fromCurrentRequestUri()
+                .fromCurrentContextPath()
                 .path("/departamento/{id}")
                 .buildAndExpand(novoDepartamento.getIdDepartamento())
                 .toUri();
@@ -65,5 +64,24 @@ public class DepartamentoController {
 
         departamentoRepository.deleteById(idDepartamento);
         return ResponseEntity.ok("Departamento: " + departamento.get().getNomeDepartamento() + " apagado com sucesso.");
+    }
+
+    @PutMapping("/editar/{id}")
+    public ResponseEntity<?> editarDepartamento(@PathVariable("id") Integer idDepartamento, @RequestBody Departamento departamento){
+        var departamentoIdentificado = departamentoRepository.findById(idDepartamento);
+
+        if (departamentoIdentificado.isPresent()){
+            var departamentoBuilder = departamentoIdentificado.get();
+
+            departamentoBuilder.setNomeDepartamento(departamento.getNomeDepartamento());
+            departamentoRepository.saveAndFlush(departamentoBuilder);
+
+            return ResponseEntity.status(HttpStatus.ACCEPTED)
+                    .body("Departamento - " + departamentoBuilder.getNomeDepartamento() + " atualizado");
+        }
+
+        return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                .body("Departamento não encontrado");
+
     }
 }

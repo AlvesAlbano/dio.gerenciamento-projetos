@@ -1,5 +1,6 @@
 package dio.gerenciamento_projetos.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
@@ -16,15 +17,16 @@ public class Alocamento {
     private Integer idAlocamento;
 
     @ManyToOne
-    @OnDelete(action = OnDeleteAction.CASCADE)
+//    @OnDelete(action = OnDeleteAction.CASCADE)
     @JoinColumn(name = "id_funcionario")
     private Funcionario funcionario;
 
     @ManyToOne
-    @OnDelete(action = OnDeleteAction.CASCADE)
+//    @OnDelete(action = OnDeleteAction.CASCADE)
     @JoinColumn(name = "id_projeto")
     private Projeto projeto;
 
+    @JsonFormat(pattern = "dd-MM-yyyy")
     @Column(name = "data_alocacao")
     private LocalDate dataAlocacao;
 

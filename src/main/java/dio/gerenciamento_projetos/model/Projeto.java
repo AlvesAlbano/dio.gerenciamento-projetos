@@ -1,5 +1,6 @@
 package dio.gerenciamento_projetos.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
@@ -19,9 +20,11 @@ public class Projeto {
     @Column(name = "descricao_projeto")
     private String descricaoProjeto;
 
+    @JsonFormat(pattern = "dd-MM-yyyy")
     @Column(name = "data_inicio")
     private LocalDate dataInicio;
 
+    @JsonFormat(pattern = "dd-MM-yyyy")
     @Column(name = "data_fim")
     private LocalDate dataFim;
 

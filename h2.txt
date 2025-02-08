@@ -54,8 +54,8 @@ create table Alocamentos (
 	id_projeto int not null,
     data_alocacao date not null,
 
-    foreign key (id_funcionario) references Funcionarios(id_funcionario) on delete cascade ,
-    foreign key (id_projeto) references Projetos(id_projeto) on delete cascade
+    foreign key (id_funcionario) references Funcionarios(id_funcionario),
+    foreign key (id_projeto) references Projetos(id_projeto)
 );
 
 INSERT INTO Alocamentos (id_funcionario, id_projeto, data_alocacao) VALUES
